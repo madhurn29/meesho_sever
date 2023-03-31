@@ -10,7 +10,7 @@ function OTPgenrator(otp_length) {
 }
 
 const registerUser = async (req, res) => {
-  const { phoneNo } = req.body;
+  const { phoneNo, firstName, lastName } = req.body;
   const otp = OTPgenrator(6);
   try {
     const existinguser = await UserModel.findOne({ phoneNo });
@@ -20,6 +20,8 @@ const registerUser = async (req, res) => {
         message: "User already exists",
         OTP: existinguser.tempOtp,
         phoneNo,
+        firstName: existinguser.firstName || "user",
+        lastName: existinguser.lastName || "user",
       });
     } else {
       req.body.tempOtp = otp;
@@ -29,6 +31,8 @@ const registerUser = async (req, res) => {
         message: "New user has been created successfully",
         OTP: +otp,
         phoneNo,
+        firstName: firstName || "user",
+        lastName: lastName || "user",
       });
     }
   } catch (error) {
