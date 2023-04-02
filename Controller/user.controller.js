@@ -90,4 +90,13 @@ const updateUser = async (req, res) => {
   }
 };
 
-module.exports = { registerUser, validateOtp, updateUser, Userlogin };
+const getUser = async (req, res) => {
+  try {
+    const users = await UserModel.find();
+    res.status(200).send(users);
+  } catch (error) {
+    res.status(400).send({ message: error.message });
+  }
+};
+
+module.exports = { registerUser, validateOtp, updateUser, Userlogin, getUser };

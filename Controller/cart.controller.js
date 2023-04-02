@@ -22,18 +22,22 @@ const addCartProduct = async (req, res) => {
 
     const decoded = jwt.verify(token, "meesho");
     const data = req.body;
-    const existingProduct = await CartModel.findOne({
-      images: req.body.images,
-      userID: decoded.userID,
-    });
+    // const existingProduct = await CartModel.findOne({
+    //   images: req.body.images,
+    //   userID: decoded.userID,
+    // });
 
-    if (existingProduct) {
-      res.status(400).send({ message: "Product already addded" });
-    } else {
-      const product = new CartModel(data);
-      await product.save();
-      res.status(200).send({ message: "A new Cart product has been added" });
-    }
+    // if (existingProduct) {
+    //   res.status(400).send({ message: "Product already addded" });
+    // } else {
+    //   const product = new CartModel(data);
+    //   await product.save();
+    //   res.status(200).send({ message: "A new Cart product has been added" });
+    // }
+
+    const product = new CartModel(data);
+    await product.save();
+    res.status(200).send({ message: "A new Cart product has been added" });
   } catch (error) {
     res.status(400).send({ error: error.message });
   }
