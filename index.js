@@ -33,10 +33,10 @@ const options = {
     },
     servers: [
       {
-        url: "http://localhost:8080",
+        url: "https://long-lime-fly-tux.cyclic.app/",
       },
       {
-        url: "https://long-lime-fly-tux.cyclic.app/",
+        url: "http://localhost:8080",
       },
     ],
   },
@@ -47,7 +47,7 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 //UI
-app.use("/documentations", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use("/", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.listen(process.env.PORT, async () => {
   try {
